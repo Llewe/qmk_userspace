@@ -1,0 +1,5 @@
+PROGRAMMABLE_BUTTON_ENABLE = yes
+USER_NAME := spacebarracecar
+GERMAN_ENABLE = yes
+
+UCIS_ENABLE = yes
