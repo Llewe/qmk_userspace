@@ -26,8 +26,8 @@ enum layers{
     // All german layers
     AG1, //ANSI_US_GER
     AG2, //ANSI_US_GER
-    GNU, // German number
-    GFN, // German fn layer
+    GNU, // German number & fn
+    GSK, // German special keys
     ANSI_US_GER_4,
     // All english layers
     ANSI_US,
@@ -74,36 +74,36 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------------------------.  ,--------------------------------------------------------------.
        KC_TAB,    DE_Q,    DE_W,    DE_E,    DE_R,    DE_T, LL_LBRC,    LL_RBRC,    DE_Y,    DE_U,    DE_I,    DE_O,   DE_P,  KC_BSPC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-      KC_LCTL,    DE_A,    DE_S,    DE_D,    DE_F,    DE_G, LL_QUOT,    CU_BSLS,    DE_H,    DE_J,    DE_K,    DE_L, CU_SCLN, KC_PGUP,
+      LL_LSFT,    DE_A,    DE_S,    DE_D,    DE_F,    DE_G, LL_QUOT,    CU_BSLS,    DE_H,    DE_J,    DE_K,    DE_L, CU_SCLN, KC_PGUP,
   //|--------+--------+--------+--------+--------+--------+--------'  `--------+--------+--------+--------+--------+--------+--------|
-      LL_LSFT,    DE_Z,    DE_X,    DE_C,    DE_V,    DE_B,                         DE_N,    DE_M, CU_COMM,  CU_DOT, CU_SLSH, KC_HOME,
+      KC_LCTL,    DE_Z,    DE_X,    DE_C,    DE_V,    DE_B,                         DE_N,    DE_M, CU_COMM,  CU_DOT, CU_SLSH, KC_HOME,
   //|--------+--------+--------+--------+--------+--------+--------.  ,--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LGUI, KC_LALT,  KC_SPC,     KC_ENT, MO(GNU), MO(GFN)
+                                          KC_LGUI, KC_LALT,  KC_SPC,     KC_ENT, MO(GNU), MO(GSK)
                                       //`--------------------------'  `--------------------------'
 
   ),
 
   [GNU] = LAYOUT_split_3x6_3_ex2(
   //,--------------------------------------------------------------.  ,--------------------------------------------------------------.
-      _______,    DE_1,    LL_2,    CU_3,    DE_4,    DE_5,  LL_GRV,    DE_MINS,    LL_6,    CU_7,    CU_8,    CU_9,    CU_0, _______,
+       KC_ESC,    DE_1,    LL_2,    CU_3,    DE_4,    DE_5,  LL_GRV,    DE_MINS,    LL_6,    CU_7,    CU_8,    CU_9,    CU_0, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     CU_EQL, KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
+      _______,  KC_F11,  KC_F12, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,     CU_EQL, KC_LEFT, KC_DOWN,   KC_UP,KC_RIGHT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------'  `--------+--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,                        KC_F6,   KC_F7,   KC_F8,   KC_F9,  KC_F10, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------.  ,--------+--------+--------+--------+--------+--------+--------|
                                           _______, _______,  _______,    _______, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [GFN] = LAYOUT_split_3x6_3_ex2(
+  [GSK] = LAYOUT_split_3x6_3_ex2(
   //,--------------------------------------------------------------.  ,--------------------------------------------------------------.
-       KC_ESC,   KC_F1,   KC_F2,  KC_F3,    KC_F4,   KC_F5, XXXXXXX,    XXXXXXX,   KC_F6,   KC_F7,   KC_F8,   KC_F9,    CU_0, KC_PSCR,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,   CU_UE, XXXXXXX,   CU_OE, XXXXXXX, KC_PSCR,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______,   CU_AE,   CU_SS, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------'  `--------+--------+--------+--------+--------+--------+--------|
-      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_END,
   //|--------+--------+--------+--------+--------+--------+--------.  ,--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______,  _______,    _______, _______, _______
+                                          _______, _______,  _______, KC_INSERT, _______, _______
                                       //`--------------------------'  `--------------------------'
   ),
 
