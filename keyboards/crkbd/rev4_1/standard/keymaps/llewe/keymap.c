@@ -277,12 +277,12 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   case LL_ARROW_LEFT://<= | <-
       if(record->event.pressed) {
           unregister_code(KC_LSFT);
-          if (rshift){
+          if (lshift){
               SEND_STRING("<-");
           }else{
               SEND_STRING("<=");
           }
-          if (lshift || rshift){
+          if (lshift){
               register_code(KC_LSFT);
           }
           return false;
@@ -290,12 +290,12 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
   case LL_ARROW_RIGHT: // =>| ->
       if(record->event.pressed) {
           unregister_code(KC_LSFT);
-          if (rshift){
+          if (lshift){
               SEND_STRING("->");
           }else{
               SEND_STRING("=>");
           }
-          if (lshift || rshift){
+          if (lshift){
               register_code(KC_LSFT);
           }
           return false;
