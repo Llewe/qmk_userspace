@@ -22,6 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "sendstring_german.h"
 #include "spacebarracecar.h"
 
+
+bool mocking_case_active = false;
+bool mocking_case_shift_up = false;
+
 enum layers{
     // All german layers
     AG1, //ANSI_US_GER
@@ -33,7 +37,10 @@ enum layers{
     ANSI_US,
 
     // Other
-    OTH
+    OTH,
+
+    DEFAULT1,
+    DEFAULT2
 };
 
 
@@ -52,7 +59,8 @@ enum custom_keycodes {
 
     LL_SM_1, //¯\_(ツ)_/¯
     LL_SM_2, //༼ つ ◕_◕ ༽つ
-    LL_SM_A
+    LL_SM_A,
+    LL_T_MOCKING
 };
 
 const ucis_symbol_t ucis_symbol_table[] = UCIS_TABLE(
@@ -112,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [OTH] = LAYOUT_split_3x6_3_ex2(
   //,--------------------------------------------------------------.  ,--------------------------------------------------------------.
-    QK_REBOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,XXXXXXX,
+    QK_REBOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,LL_T_MOCKING,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
       RGB_MOD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------'  `--------+--------+--------+--------+--------+--------+--------|
@@ -122,7 +130,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [4] = LAYOUT_split_3x6_3_ex2(
+  [DEFAULT1] = LAYOUT_split_3x6_3_ex2(
   //,--------------------------------------------------------------.  ,--------------------------------------------------------------.
        KC_TAB, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC, KC_LCTL,    KC_RCTL, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -134,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [5] = LAYOUT_split_3x6_3_ex2(
+  [DEFAULT2] = LAYOUT_split_3x6_3_ex2(
   //,--------------------------------------------------------------.  ,--------------------------------------------------------------.
       QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -316,8 +324,34 @@ bool process_record_keymap(uint16_t keycode, keyrecord_t *record) {
       ucis_start();
     }
     return false;
+  case LL_T_MOCKING:
+    if(record->event.pressed) {
+
+    mocking_case_active = !mocking_case_active;
+    }
+
+case DE_A ... DE_Z:{
+    if (mocking_case_active && record->event.pressed) {
+        if (mocking_case_shift_up) {
+            register_code(KC_LSFT);
+        }
+        mocking_case_shift_up = !mocking_case_shift_up;
+    }
+}
   default:
     return true;
   }
 }
 
+
+
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case DE_A ... DE_Z:{
+            if (mocking_case_active && record->event.pressed) {
+                                 unregister_code(KC_LSFT);
+                       }
+        }
+    }
+
+}
