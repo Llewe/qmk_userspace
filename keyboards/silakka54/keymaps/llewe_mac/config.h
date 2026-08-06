@@ -20,7 +20,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-// #define MASTER_RIGHT //Build for the right side as master
+#define MASTER_RIGHT //Build for the right side as master
+
+#define BOOTLOADER_WAIT 3000
 
 // send_unicode_string()/UCIS use macOS "Unicode Hex Input" instead of the
 // default input mode. The input source has to be enabled in

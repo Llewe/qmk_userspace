@@ -1,4 +1,5 @@
 PROGRAMMABLE_BUTTON_ENABLE = yes
-USER_NAME := spacebarracecar
+USER_NAME := llewe
 GERMAN_ENABLE = yes
+GERMAN_MAC_ISO = yes
 UCIS_ENABLE = yes

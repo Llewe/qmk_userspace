@@ -10,9 +10,9 @@ I'm using the US Ansi layout however I'm living in Germany which means that ever
 ### How to use
 
 - To activate the custom keycodes set GERMAN_ENABLE = yes in the keyboards rules.mk file.
-- The keycodes are listed and explained in [spacebarracecar.h](spacebarracecar.h) under `enum userspace_custom_keycodes`.
-- The keycodes are handled by the `process_record_user` function which is now located in [spacebarracecar.c](spacebarracecar.c). To change keyboard specific configuration `process_record_keymap` is used (see [drashna userspace readme](../drashna/readme.md) for better explanation).
-- There is a predefined `_DEADKEY` layer in [spacebarracecar.h](spacebarracecar.h) under `enum userspace_layers`. Shifted CU_QUOT enables the dead key layer, just like KC_QUOT would when using the US International layout. (See `enum userspace_custom_keycodes` for more explanation).
+- The keycodes are listed and explained in [llewe.h](llewe.h) under `enum userspace_custom_keycodes`.
+- The keycodes are handled by the `process_record_user` function which is now located in [llewe.c](llewe.c). To change keyboard specific configuration `process_record_keymap` is used (see [drashna userspace readme](../drashna/readme.md) for better explanation).
+- There is a predefined `_DEADKEY` layer in [llewe.h](llewe.h) under `enum userspace_layers`. Shifted CU_QUOT enables the dead key layer, just like KC_QUOT would when using the US International layout. (See `enum userspace_custom_keycodes` for more explanation).
 - On Windows grave and circonflexe are defined as dead keys when using the standard german layout. Those are automatically escaped when using the custom keycodes. `CU_ESCT` can be used to enable/disable this behavior.
 - For a complete example see my [planck](../../keyboards/planck/keymaps/spacebarracecar/keymap.c) keymap.
 
@@ -35,7 +35,7 @@ To track the physical shift state there are two custom left and right shift keyc
 
 #### Custom keycode templates
 
-To ease the creation of custom keycodes there are a few templates defined in [spacebarracecar.h](spacebarracecar.h).
+To ease the creation of custom keycodes there are a few templates defined in [llewe.h](llewe.h).
 
 - `SHIFT_NORM(kc1, kc2)` Sends independent keycodes kc1 and kc2 depending on physical shift state without changing shift state.
 - `SHIFT_SWITCH(kc1, kc2)` Sends independent keycodes kc1 and kc2 depending on physical shift state while flipping shift state.
@@ -104,7 +104,7 @@ In theory the templates can be used to create custom keycodes that map any layou
 
 ### Custom Nav/Esc Key
 
-Since I'm always using a navigation layer with all my keyboards there is a `_NAV` layer predefined in [spacebarracecar.h](spacebarracecar.h) under `enum userspace_layers`. In addition to that I wanted to have a keycode that activates the navigation layer when held, but acts as Escape when pressed. In QMK there already exists `LT(layer, kc)`, however I found that there is some amount of lag before the layer is actived. Therefore I created a custom keycode CU_NAV that does the same without lag using a custom timer. Since I already need timers for the custom space cadet shift implementing this was very easy by adding the timer to the `timer_timeout` function.
+Since I'm always using a navigation layer with all my keyboards there is a `_NAV` layer predefined in [llewe.h](llewe.h) under `enum userspace_layers`. In addition to that I wanted to have a keycode that activates the navigation layer when held, but acts as Escape when pressed. In QMK there already exists `LT(layer, kc)`, however I found that there is some amount of lag before the layer is actived. Therefore I created a custom keycode CU_NAV that does the same without lag using a custom timer. Since I already need timers for the custom space cadet shift implementing this was very easy by adding the timer to the `timer_timeout` function.
 
 ### Gamemode
 
