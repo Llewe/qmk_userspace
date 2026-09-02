@@ -20,4 +20,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-// #define MASTER_RIGHT //Build for the right side as master
+// Each half knows its role (left/right) from EE_HANDS. Simplest flashing:
+// use the CI artifacts silakka54_llewe_left.uf2 / silakka54_llewe_right.uf2
+// (built with -e HANDEDNESS=left|right, see rules.mk) - each forces its role
+// on every boot. Or flash each half once with
+//   qmk flash -kb silakka54 -km llewe -bl uf2-split-left   (left halves)
+//   qmk flash -kb silakka54 -km llewe -bl uf2-split-right  (right halves)
+// The half connected to USB is then the master automatically, so the same
+// firmware works with USB on the left or the right side.
+#define EE_HANDS
+
+// The six-thumb chord needs more time than the default 50ms to land.
+#define COMBO_TERM 150
+
+// send_unicode_string()/UCIS switch between macOS "Unicode Hex Input" and the
+// Linux mode at runtime (see os_toggle() in llewe_common.h of this keymap).
+#define UNICODE_SELECTED_MODES UNICODE_MODE_MACOS, UNICODE_MODE_LINUX

@@ -12,6 +12,15 @@ jobs:
     with:
       qmk_repo: qmk/qmk_firmware
       qmk_ref: master
+      preparation_command: |
+        # Handedness variants for the silakka54 "llewe" keymap (EE_HANDS).
+        # Each .uf2 forces its half's role on every boot, so flashing is
+        # drag & drop: silakka54_llewe_left.uf2 on both left halves,
+        # silakka54_llewe_right.uf2 on both right halves.
+        qmk compile -kb silakka54 -km llewe -e HANDEDNESS=left
+        mv silakka54_llewe.uf2 silakka54_llewe_left.uf2
+        qmk compile -kb silakka54 -km llewe -e HANDEDNESS=right
+        mv silakka54_llewe.uf2 silakka54_llewe_right.uf2
 
   publish:
     name: 'QMK Userspace Publish'

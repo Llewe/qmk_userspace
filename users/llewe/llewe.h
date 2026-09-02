@@ -1,12 +1,7 @@
 #pragma once
 
 #include "quantum.h"
-#ifdef GERMAN_MAC_ISO
-#include "keymap_german_mac_iso.h"
-#else
 #include "keymap_german.h"
-#endif
-#include "german_mac_iso.h"
 // define the custom safe range from k6 pro so the k6 keycodes aren't overwritten
 // #include "k6_pro.h"
 
