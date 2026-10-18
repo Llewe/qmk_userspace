@@ -30,6 +30,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // firmware works with USB on the left or the right side.
 #define EE_HANDS
 
+// RP2040-Zero has no VBUS sense, so the USB half must be enumerated within this
+// window or it boots as slave. 2s default is too short for BIOS POST / KVM switch.
+#define SPLIT_USB_TIMEOUT 5000
+
 // The six-thumb chord needs more time than the default 50ms to land.
 #define COMBO_TERM 150
 
